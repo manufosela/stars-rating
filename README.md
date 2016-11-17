@@ -1,0 +1,1 @@
+# cvitaede-starsrating
