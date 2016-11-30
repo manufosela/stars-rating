@@ -1,6 +1,7 @@
 {
   "name": "cvitaede-starsrating",
   "main": "cvitaede-starsrating.html",
+  "keywords": "web-components",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0"
   },
