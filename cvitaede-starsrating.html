@@ -3,12 +3,15 @@
 <dom-module id="cvitaede-starsrating">
   <template>
     <style>
-      :host {
-        display: block;
-        max-width:500px;
-        min-height:40px;
-      }
-      fieldset,
+     :host {
+      display: block;
+      max-width: 500px;
+      min-height: 40px;
+      font-size: 30px;
+      --var-star-size: 3em;
+    }
+    
+    fieldset,
     label {
       margin: 0;
       padding: 0;
@@ -25,7 +28,7 @@
     
     .rating>label:before {
       margin: 5px;
-      font-size: 3em;
+      font-size: var(--star-size);
       display: inline-block;
       content: "\2605";
     }
@@ -43,6 +46,7 @@
     .rating>input:checked~label {
       color: #FFD700;
     }
+
     </style>
     <fieldset class="rating">
       <template is="dom-repeat" items="[[_stars]]">
@@ -54,32 +58,38 @@
   </template>
 
   <script>
-    Polymer({
+  Polymer({
 
-      is: 'cvitaede-starsrating',
+    is: 'cvitaede-starsrating',
 
-      properties: {
-        _stars:{
-          type: Object
-        },
-        num_stars: {
-          type: Number,
-          value: 7
-        },
-        rating: {
-          type: Number,
-          value: 3
-        }
+    properties: {
+      _stars: {
+        type: Object
       },
-      ready: function(){
-        this._stars = new Array(this.num_stars);
+      numStars: {
+        type: Number,
+        value: 7
       },
-      attached: function(){
-        this.querySelector('#star'+this.rating).setAttribute('checked','checked');
+      starSize: {
+        type: String,
+        value: "3em"
       },
-      _computeIndex: function(index){
-        return this.num_stars - index;
+      rating: {
+        type: Number,
+        value: 3
       }
-    });
+    },
+    ready: function() {
+      this._stars = new Array(this.numStars);
+    },
+    attached: function() {
+      this.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
+      this.customStyle['--star-size'] = this.starSize;
+    },
+    _computeIndex: function(index) {
+      return this.numStars - index;
+    }
+  });
+
   </script>
 </dom-module>
