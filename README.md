@@ -1,6 +1,8 @@
 # \<cvitaede-starsrating\>
 
+## Demo
 
+[cvitaede-starsrating demo](http://codepen.io/manufosela/pen/QGaKMw)
 
 ## Install the Polymer-CLI
 
