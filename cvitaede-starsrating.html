@@ -4,56 +4,55 @@
   <template>
     <style>
      :host {
-      display: block;
-      max-width: 500px;
-      min-height: 40px;
-      font-size: 30px;
-      --var-star-size: 3em;
-    }
-    
-    fieldset,
-    label {
-      margin: 0;
-      padding: 0;
-    }
-    
-    .rating {
-      border: none;
-      float: left;
-    }
-    
-    .rating>input {
-      display: none;
-    }
-    
-    .rating>label:before {
-      margin: 5px;
-      font-size: var(--star-size);
-      display: inline-block;
-      content: "\2605";
-    }
-    
-    .rating>.half:before {
-      content: "\f089";
-      position: absolute;
-    }
-    
-    .rating>label {
-      color: #ddd;
-      float: right;
-    }
-    
-    .rating>input:checked~label {
-      color: #FFD700;
-    }
-
+        display: block;
+        max-width: 500px;
+        min-height: 40px;
+        font-size: 30px;
+        --var-star-size: 3em;
+      }
+      
+      :host fieldset,
+      :host label {
+        margin: 0;
+        padding: 0;
+      }
+      
+      :host .rating {
+        border: none;
+        float: left;
+      }
+      
+      :host .rating>input {
+        display: none;
+      }
+      
+      :host .rating > label:before {
+        margin: 5px;
+        font-size: var(--star-size);
+        display: inline-block;
+        content: "\2605";
+      }
+      
+      :host .rating > .half:before {
+        content: "\f089";
+        position: absolute;
+      }
+      
+      :host .rating > label {
+        color: #ddd;
+        float: right;
+      }
+      
+      :host .rating > input:checked ~ label {
+        color: #FFD700;
+      }
     </style>
+
     <fieldset class="rating">
       <template is="dom-repeat" items="[[_stars]]">
         <input type="radio" id$="star[[_computeIndex(index)]]" name="rating" value="[[_computeIndex(index)]]" disabled />
-        <label class="full" for="star[[_computeIndex(index)]]"></label>
+        <label for="star[[_computeIndex(index)]]"></label>
       </template>
-
     </fieldset>
   </template>
 
@@ -72,7 +71,7 @@
       },
       starSize: {
         type: String,
-        value: "3em"
+        value: "1em"
       },
       rating: {
         type: Number,
@@ -83,8 +82,10 @@
       this._stars = new Array(this.numStars);
     },
     attached: function() {
+      console.log(this.querySelector('#star' + this.rating));
       this.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
       this.customStyle['--star-size'] = this.starSize;
+      this.updateStyles();
     },
     _computeIndex: function(index) {
       return this.numStars - index;
