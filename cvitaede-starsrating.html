@@ -75,13 +75,37 @@
       },
       rating: {
         type: Number,
-        value: 3
+        value: 0
+      },
+      mode: {
+        type: String,
+        value: "auto"
       }
     },
     ready: function() {
       this._stars = new Array(this.numStars);
     },
     attached: function() {
+      if (this.mode === 'manual') {
+        this.querySelectorAll('label').forEach(
+          function(label) { 
+            label.addEventListener('click', 
+              function(ev) {
+                this.querySelectorAll('input').forEach( function(item) { item.removeAttribute('checked'); });
+                this.querySelector('#' +ev.target.for).setAttribute('checked', 'checked');
+                this.rating = parseInt(ev.target.for.replace('star',''));
+              }.bind(this)
+            );
+          }.bind(this)
+        );
+      }
+      if (this.rating > 0) {
+        this.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
+        this.customStyle['--star-size'] = this.starSize;
+        this.updateStyles();
+      }
+    },
+    _attached: function() {
       console.log(this.querySelector('#star' + this.rating));
       this.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
       this.customStyle['--star-size'] = this.starSize;

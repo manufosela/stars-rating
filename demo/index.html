@@ -13,6 +13,9 @@
 
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
+    <style>
+      demo-snippet { width: 600px; }
+    </style>
   </head>
   <body>
 
@@ -20,12 +23,25 @@
       <h3>Basic cvitaede-starsrating Demo</h3>
       <demo-snippet>
         <template>
-          <cvitaede-starsrating num-stars="8"></cvitaede-starsrating>
+          <cvitaede-starsrating num-stars="8" rating="6"></cvitaede-starsrating>
         </template>
       </demo-snippet>
       <demo-snippet>
         <template>
-          <cvitaede-starsrating num-stars="5" rating="4" star-size="0.5em"></cvitaede-starsrating>
+          <cvitaede-starsrating num-stars="12" rating="8" star-size="0.5em"></cvitaede-starsrating>
+        </template>
+      </demo-snippet>
+      <demo-snippet>
+        <p>Click in star to vote a rating</p>
+        <template>
+          <cvitaede-starsrating num-stars="5" mode="manual"></cvitaede-starsrating>
+        </template>
+      </demo-snippet>
+
+      <demo-snippet>
+        <p>Click in star to change the rating</p>
+        <template>
+          <cvitaede-starsrating num-stars="5" rating="3" mode="manual"></cvitaede-starsrating>
         </template>
       </demo-snippet>
     </div>
