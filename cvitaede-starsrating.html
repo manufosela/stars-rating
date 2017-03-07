@@ -6,7 +6,8 @@
         max-width: 500px;
         min-height: 40px;
         font-size: 30px;
-        --var-star-size: 3em;
+        --star-size: 1em;
+        --star-color: #FFD700;
       }
       
       :host fieldset,
@@ -37,12 +38,14 @@
       }
       
       :host .rating > label {
-        color: #ddd;
+        color: var(--star-color);
         float: right;
+        opacity: 0.3;
       }
       
       :host .rating > input[checked] ~ label {
-        color: #FFD700;
+        color: var(--star-color);
+        opacity: 1;
       }
     </style>
 
@@ -102,12 +105,6 @@
         this.customStyle['--star-size'] = this.starSize;
         this.updateStyles();
       }
-    },
-    _attached: function() {
-      console.log(this.querySelector('#star' + this.rating));
-      this.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
-      this.customStyle['--star-size'] = this.starSize;
-      this.updateStyles();
     },
     _computeIndex: function(index) {
       return this.numStars - index;
