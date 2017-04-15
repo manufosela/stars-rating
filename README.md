@@ -7,6 +7,29 @@ Polymer web component configurable to vote a rate stars.
 [cvitaede-starsrating demo](http://codepen.io/manufosela/pen/QGaKMw)
 
 
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="cvitaede-starsrating.html">
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<h3>Basic cvitaede-starsrating Demo</h3>
+<cvitaede-starsrating num-stars="8" rating="6"></cvitaede-starsrating>
+
+<cvitaede-starsrating num-stars="12" rating="8" star-size="0.5em"></cvitaede-starsrating>
+
+<p>Click in star to vote a rating</p>
+<cvitaede-starsrating num-stars="5" mode="manual"></cvitaede-starsrating>
+
+<p>Click in star to change the rating</p>
+<cvitaede-starsrating num-stars="5" rating="3" mode="manual"></cvitaede-starsrating>
+```
+
+
 ## Getting Started
 
 Clone the repository. Install all dependencies with `bower install`. Then run `polymer serve` to serve your application locally.
