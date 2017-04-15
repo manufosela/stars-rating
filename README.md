@@ -1,4 +1,4 @@
-# cvitaede-starsrating Polymer Web Component [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/manufosela/cvitaede-starsrating)
+# cvitaede-starsrating [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/manufosela/cvitaede-starsrating)
 
 
 Polymer web component configurable to vote a rate stars.
