@@ -19,7 +19,6 @@ Polymer web component configurable to vote a rate stars.
 ```
 -->
 ```html
-<h3>Basic cvitaede-starsrating Demo</h3>
 <cvitaede-starsrating num-stars="8" rating="6"></cvitaede-starsrating>
 
 <cvitaede-starsrating num-stars="12" rating="8" star-size="0.5em"></cvitaede-starsrating>
