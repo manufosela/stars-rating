@@ -7,7 +7,6 @@ Polymer web component configurable to vote a rate stars.
 
 [cvitaede-starsrating demo](http://codepen.io/manufosela/pen/QGaKMw)
 
-
 <!--
 ```
 <custom-element-demo>
@@ -17,6 +16,11 @@ Polymer web component configurable to vote a rate stars.
 </custom-element-demo>
 ```
 -->
+<link href="http://polygit.org/polymer+:master/components/polymer/polymer.html" rel="import">
+<link rel="import" href="cvitaede-starsrating.html">
+<cvitaede-starsrating num-stars="8" rating="6"></cvitaede-starsrating>
+
+
 ```html
 <h3>Basic cvitaede-starsrating Demo</h3>
 <cvitaede-starsrating num-stars="8" rating="6"></cvitaede-starsrating>
