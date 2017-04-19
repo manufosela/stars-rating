@@ -7,7 +7,7 @@ Polymer web component configurable to vote a rate stars.
 
 [cvitaede-starsrating demo](http://codepen.io/manufosela/pen/QGaKMw)
 
-<!---
+<!--
 ```
 <custom-element-demo>
   <template>
