@@ -1,54 +1,55 @@
 <dom-module id="cvitaede-starsrating">
   <template>
-    <style>
-     :host {
-        display: block;
-        max-width: 500px;
-        min-height: 40px;
-        font-size: 30px;
-        --star-size: 1em;
-        --star-color: #FFD700;
-      }
-      
-      :host fieldset,
-      :host label {
-        margin: 0;
-        padding: 0;
-      }
-      
-      :host .rating {
-        border: none;
-        float: left;
-      }
-      
-      :host .rating>input {
-        display: none;
-      }
-      
-      :host .rating > label:before {
-        margin: 5px;
-        font-size: var(--star-size);
-        display: inline-block;
-        content: "\2605";
-      }
-      
-      :host .rating > .half:before {
-        content: "\f089";
-        position: absolute;
-      }
-      
-      :host .rating > label {
-        color: var(--star-color);
-        float: right;
-        opacity: 0.3;
-      }
-      
-      :host .rating > input[checked] ~ label {
-        color: var(--star-color);
-        opacity: 1;
-      }
-    </style>
-
+    <custom-style>
+      <style>
+        :host {
+          display: block;
+          max-width: 500px;
+          min-height: 40px;
+          font-size: 30px;
+          --star-size: 1em;
+          --star-color: #FFD700;
+        }
+        
+        :host fieldset,
+        :host label {
+          margin: 0;
+          padding: 0;
+        }
+        
+        :host .rating {
+          border: none;
+          float: left;
+        }
+        
+        :host .rating>input {
+          display: none;
+        }
+        
+        :host .rating > label:before {
+          margin: 5px;
+          font-size: var(--star-size);
+          display: inline-block;
+          content: "\2605";
+        }
+        
+        :host .rating > .half:before {
+          content: "\f089";
+          position: absolute;
+        }
+        
+        :host .rating > label {
+          color: var(--star-color);
+          float: right;
+          opacity: 0.3;
+        }
+        
+        :host .rating > input[checked] ~ label {
+          color: var(--star-color);
+          opacity: 1;
+        }
+      </style>
+    </custom-style>
     <fieldset class="rating">
       <template is="dom-repeat" items="[[_stars]]">
         <input type="radio" id$="star[[_computeIndex(index)]]" name="rating" value="[[_computeIndex(index)]]" disabled />
@@ -60,7 +61,7 @@
   <script>
     class CvitaedeStarsrating extends Polymer.Element {
 
-      static get is() { return 'cvitae-starsrating'; }
+      static get is() { return 'cvitaede-starsrating'; }
 
       static get properties() {
         return {
@@ -77,7 +78,8 @@
           },
           rating: {
             type: Number,
-            value: 0
+            value: 0,
+            observer: '_ratingChange'
           },
           mode: {
             type: String,
@@ -90,27 +92,34 @@
         super();
         this._stars = new Array(this.numStars);
       }
+
+      _ratingChange(newVal, oldVal) {
+        if (oldVal!==undefined) {
+         // console.log('Voted ' + (2+newVal)); //2 to vote from 1 to N stars or 1 to vote from to N-1 stars
+        }
+      }
     
       connectedCallback() { 
         super.connectedCallback();
-        if (this.mode === 'manual') {
-          this.querySelectorAll('label').forEach(
-            function(label) { 
-              label.addEventListener('click', 
-                function(ev) {
-                  this.querySelectorAll('input').forEach( function(item) { item.removeAttribute('checked'); });
-                  this.querySelector('#' +ev.target.for).setAttribute('checked', 'checked');
-                  this.rating = parseInt(ev.target.for.replace('star',''));
-                }.bind(this)
-              );
-            }.bind(this)
-          );
-        }
-        if (this.rating > 0) {
-          this.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
-          this.customStyle['--star-size'] = this.starSize;
-          this.updateStyles();
-        }
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          if (this.mode === 'manual') {
+            this.root.querySelectorAll('label').forEach(
+              function(label) { 
+                label.addEventListener('click', 
+                  function(ev) {
+                    this.root.querySelectorAll('input').forEach( function(item) { item.removeAttribute('checked'); });
+                    this.root.querySelector('#' +ev.target.for).setAttribute('checked', 'checked');
+                    this.rating = parseInt(ev.target.for.replace('star',''));
+                  }.bind(this)
+                );
+              }.bind(this)
+            );
+          }
+          if (this.rating > 0) {
+            this.root.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
+            this.updateStyles('--star-size', this.starSize);
+          }
+        });
       }
 
       _computeIndex(index) {
