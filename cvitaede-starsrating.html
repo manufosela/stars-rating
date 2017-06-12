@@ -70,7 +70,8 @@
           },
           numStars: {
             type: Number,
-            value: 7
+            value: 7,
+            observer: '_updateNumStars'
           },
           starSize: {
             type: String,
@@ -90,13 +91,17 @@
 
       constructor() {
         super();
-        this._stars = new Array(this.numStars);
+        this._updateNumStars();
       }
 
       _ratingChange(newVal, oldVal) {
         if (oldVal!==undefined) {
          // console.log('Voted ' + (2+newVal)); //2 to vote from 1 to N stars or 1 to vote from to N-1 stars
         }
+      }
+
+      _updateNumStars() {
+        this._stars = new Array(this.numStars);
       }
     
       connectedCallback() { 
