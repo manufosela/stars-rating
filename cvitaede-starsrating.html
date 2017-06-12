@@ -58,58 +58,66 @@
   </template>
 
   <script>
-  Polymer({
+    class CvitaedeStarsrating extends Polymer.Element {
 
-    is: 'cvitaede-starsrating',
+      static get is() { return 'cvitae-starsrating'; }
 
-    properties: {
-      _stars: {
-        type: Object
-      },
-      numStars: {
-        type: Number,
-        value: 7
-      },
-      starSize: {
-        type: String,
-        value: "1em"
-      },
-      rating: {
-        type: Number,
-        value: 0
-      },
-      mode: {
-        type: String,
-        value: "auto"
+      static get properties() {
+        return {
+          _stars: {
+            type: Object
+          },
+          numStars: {
+            type: Number,
+            value: 7
+          },
+          starSize: {
+            type: String,
+            value: "1em"
+          },
+          rating: {
+            type: Number,
+            value: 0
+          },
+          mode: {
+            type: String,
+            value: "auto"
+          }
+        };
       }
-    },
-    ready: function() {
-      this._stars = new Array(this.numStars);
-    },
-    attached: function() {
-      if (this.mode === 'manual') {
-        this.querySelectorAll('label').forEach(
-          function(label) { 
-            label.addEventListener('click', 
-              function(ev) {
-                this.querySelectorAll('input').forEach( function(item) { item.removeAttribute('checked'); });
-                this.querySelector('#' +ev.target.for).setAttribute('checked', 'checked');
-                this.rating = parseInt(ev.target.for.replace('star',''));
-              }.bind(this)
-            );
-          }.bind(this)
-        );
+
+      constructor() {
+        super();
+        this._stars = new Array(this.numStars);
       }
-      if (this.rating > 0) {
-        this.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
-        this.customStyle['--star-size'] = this.starSize;
-        this.updateStyles();
+    
+      connectedCallback() { 
+        super.connectedCallback();
+        if (this.mode === 'manual') {
+          this.querySelectorAll('label').forEach(
+            function(label) { 
+              label.addEventListener('click', 
+                function(ev) {
+                  this.querySelectorAll('input').forEach( function(item) { item.removeAttribute('checked'); });
+                  this.querySelector('#' +ev.target.for).setAttribute('checked', 'checked');
+                  this.rating = parseInt(ev.target.for.replace('star',''));
+                }.bind(this)
+              );
+            }.bind(this)
+          );
+        }
+        if (this.rating > 0) {
+          this.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
+          this.customStyle['--star-size'] = this.starSize;
+          this.updateStyles();
+        }
       }
-    },
-    _computeIndex: function(index) {
-      return this.numStars - index;
+
+      _computeIndex(index) {
+        return this.numStars - index;
+      }
     }
-  });
 
+    window.customElements.define(CvitaedeStarsrating.is, CvitaedeStarsrating);
   </script>
 </dom-module>
