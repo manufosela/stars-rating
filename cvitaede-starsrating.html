@@ -103,6 +103,10 @@
       _updateNumStars() {
         this._stars = new Array(this.numStars);
       }
+
+      reset() {
+        this.root.querySelectorAll('input').forEach( function(item) { item.removeAttribute('checked'); });
+      }
     
       connectedCallback() { 
         super.connectedCallback();
