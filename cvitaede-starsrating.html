@@ -95,8 +95,10 @@
       }
 
       _ratingChange(newVal, oldVal) {
-        if (oldVal!==undefined) {
-         // console.log('Voted ' + (2+newVal)); //2 to vote from 1 to N stars or 1 to vote from to N-1 stars
+        var cvitaeStars  = this.root.querySelector('#star' + this.rating);
+        if (cvitaeStars) {
+          cvitaeStars.setAttribute('checked', 'checked');
+          this.updateStyles('--star-size', this.starSize);
         }
       }
 
@@ -125,8 +127,7 @@
             );
           }
           if (this.rating > 0) {
-            this.root.querySelector('#star' + this.rating).setAttribute('checked', 'checked');
-            this.updateStyles('--star-size', this.starSize);
+            this._ratingChange();
           }
         });
       }
