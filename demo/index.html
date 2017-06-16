@@ -12,8 +12,11 @@
     <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../cvitaede-starsrating.html">
 
+    <link rel="import" href="../bower_components/polymer/lib/elements/dom-bind.html">
+
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
+
       </style>
     </custom-style>
   </head>
@@ -31,17 +34,33 @@
           <cvitaede-starsrating num-stars="12" rating="8" star-size="0.5em"></cvitaede-starsrating>
         </template>
       </demo-snippet>
+      <h3>Customized</h3>
       <demo-snippet>
-        <p>Click in star to vote a rating</p>
         <template>
-          <cvitaede-starsrating num-stars="5" mode="manual"></cvitaede-starsrating>
+					<style>
+						#emoji {
+							--start-unicode: '❤️';
+							--star-size: 0.5em;
+						}
+					</style>
+          <cvitaede-starsrating id="emoji" num-stars="8" rating="6"></cvitaede-starsrating>
+        </template>
+      </demo-snippet>
+      <h3>Click in star to vote a rating</h3>
+      <demo-snippet>
+        <template>
+          <dom-bind>
+            <template>
+              <p>Your rating: {{rating}}</p>
+              <cvitaede-starsrating num-stars="5" manual rating="{{rating}}"></cvitaede-starsrating>
+            </template>
+          </dom-bind>
         </template>
       </demo-snippet>
 
       <demo-snippet>
-        <p>Click in star to change the rating</p>
         <template>
-          <cvitaede-starsrating num-stars="5" rating="3" mode="manual"></cvitaede-starsrating>
+          <cvitaede-starsrating num-stars="5" rating="3" manual></cvitaede-starsrating>
         </template>
       </demo-snippet>
     </div>

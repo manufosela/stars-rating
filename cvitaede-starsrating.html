@@ -2,59 +2,50 @@
   <template>
     <custom-style>
       <style>
-        :host {
+        :host(:not([hidden])) {
           display: block;
-          max-width: 500px;
-          min-height: 40px;
-          font-size: 30px;
+          font-size: 2em;
           --star-size: 1em;
           --star-color: #FFD700;
         }
-        
-        :host fieldset,
-        :host label {
+
+        fieldset,
+        label {
           margin: 0;
           padding: 0;
         }
-        
-        :host .rating {
+
+        fieldset {
           border: none;
-          float: left;
         }
-        
-        :host .rating>input {
+        input {
           display: none;
         }
-        
-        :host .rating > label:before {
-          margin: 5px;
-          font-size: var(--star-size);
+
+        label:before {
+          font-size: var(--star-size, 1em);
           display: inline-block;
-          content: "\2605";
+          content: var(--start-unicode, "\2605");
         }
-        
-        :host .rating > .half:before {
-          content: "\f089";
-          position: absolute;
-        }
-        
-        :host .rating > label {
+
+        label {
           color: var(--star-color);
-          float: right;
           opacity: 0.3;
         }
-        
-        :host .rating > input[checked] ~ label {
-          color: var(--star-color);
+
+        label[hightlight] {
           opacity: 1;
         }
       </style>
     </custom-style>
-    <fieldset class="rating">
-      <template is="dom-repeat" items="[[_stars]]">
-        <input type="radio" id$="star[[_computeIndex(index)]]" name="rating" value="[[_computeIndex(index)]]" disabled />
-        <label for="star[[_computeIndex(index)]]"></label>
-      </template>
+    <fieldset id="rating">
+      <dom-repeat items="[[_stars]]">
+        <template>
+          <label for="star[[index]]" hightlight$="[[_isHightlight(index, rating)]]">
+            <input type="radio" id$="star[[index]]" name="rating" value="[[index]]"/>
+          </label>
+        </template>
+      </dom-repeat>
     </fieldset>
   </template>
 
@@ -66,21 +57,23 @@
       static get properties() {
         return {
           _stars: {
-            type: Object
+            type: Array,
+            computed: '_updateNumStars(numStars)'
           },
           numStars: {
             type: Number,
-            value: 7,
-            observer: '_updateNumStars'
-          },
-          starSize: {
-            type: String,
-            value: "1em"
+            value: 7
           },
           rating: {
             type: Number,
+            notify: true,
             value: 0,
             observer: '_ratingChange'
+          },
+          manual: {
+            type: Boolean,
+            value: false,
+            observer: '_manualChanged'
           },
           mode: {
             type: String,
@@ -91,50 +84,53 @@
 
       constructor() {
         super();
-        this._updateNumStars();
+        this._rate = this._rate.bind(this);
       }
 
-      _ratingChange(newVal, oldVal) {
-        this.reset();
-        var cvitaeStars  = this.root.querySelector('#star' + this.rating);
-        if (cvitaeStars) {
-          cvitaeStars.setAttribute('checked', 'checked');
-          this.updateStyles('--star-size', this.starSize);
+
+      connectedCallback() {
+        super.connectedCallback();
+        // Backward compatibility
+        this.manual = this.manual || this.mode === "manual";
+      }
+
+      disconeectedCallback() {
+        super.disconeectedCallback();
+        this.$.rating.removeEventListener('click', this._rate);
+      }
+
+      _isHightlight(index, rating) {
+        return index < rating;
+      }
+
+      _ratingChange(rating) {
+        if (rating < rating) {
+          this.rating = 0;
+        } else if (rating > this.numStars) {
+          this.rating = this.numStars;
         }
       }
 
-      _updateNumStars() {
-        this._stars = new Array(this.numStars);
+      _updateNumStars(numStars) {
+        return new Array(numStars);
       }
 
       reset() {
-        this.root.querySelectorAll('input').forEach( function(item) { item.removeAttribute('checked'); });
-      }
-    
-      connectedCallback() { 
-        super.connectedCallback();
-        Polymer.RenderStatus.afterNextRender(this, function() {
-          if (this.mode === 'manual') {
-            this.root.querySelectorAll('label').forEach(
-              function(label) { 
-                label.addEventListener('click', 
-                  function(ev) {
-                    this.root.querySelectorAll('input').forEach( function(item) { item.removeAttribute('checked'); });
-                    this.root.querySelector('#' +ev.target.for).setAttribute('checked', 'checked');
-                    this.rating = parseInt(ev.target.for.replace('star',''));
-                  }.bind(this)
-                );
-              }.bind(this)
-            );
-          }
-          if (this.rating > 0) {
-            this._ratingChange();
-          }
-        });
+        this.rating = 0;
       }
 
-      _computeIndex(index) {
-        return this.numStars - index;
+      _manualChanged(manual) {
+        if (this.manual) {
+          this.$.rating.addEventListener('click', this._rate);
+        } else {
+          this.$.rating.removeEventListener('click', this._rate);
+        }
+      }
+
+      _rate(ev) {
+        if (ev.target.nodeName === 'INPUT') {
+          this.rating = parseInt(ev.target.value) + 1;
+        }
       }
     }
 
