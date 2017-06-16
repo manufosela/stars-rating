@@ -95,9 +95,7 @@
       }
 
       _ratingChange(newVal, oldVal) {
-        if (this.rating===0) {
-          this.reset();
-        }
+        this.reset();
         var cvitaeStars  = this.root.querySelector('#star' + this.rating);
         if (cvitaeStars) {
           cvitaeStars.setAttribute('checked', 'checked');
