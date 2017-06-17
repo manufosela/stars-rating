@@ -42,3 +42,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 * Cesar Villar @beatbits 
 Thank you for his comments and that he is always there to help
+* Jorge del Casar @jorgecasar
+Thank you for emojis and improvements. You are a true ninja! ;)
