@@ -5,7 +5,8 @@ Polymer web component configurable to vote a rate stars.
 
 ## Demo
 
-[cvitaede-starsrating demo](http://codepen.io/manufosela/pen/QGaKMw)
+[cvitaede-starsrating codepen demo](http://codepen.io/manufosela/pen/QGaKMw)
+[cvitaede-starsrating jsfiddle demo](https://jsfiddle.net/manufosela/2qnz1Lx2/)
 
 <!---
 ```
