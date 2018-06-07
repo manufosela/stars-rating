@@ -5,7 +5,8 @@ Polymer web component configurable to vote a rate stars.
 
 ## Demo
 
-[cvitaede-starsrating demo](http://codepen.io/manufosela/pen/QGaKMw)
+[cvitaede-starsrating codepen demo](http://codepen.io/manufosela/pen/QGaKMw)
+[cvitaede-starsrating jsfiddle demo](https://jsfiddle.net/manufosela/2qnz1Lx2/)
 
 <!---
 ```
@@ -42,3 +43,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 * Cesar Villar @beatbits 
 Thank you for his comments and that he is always there to help
+* Jorge del Casar @jorgecasar
+Thank you for emojis and improvements. You are a true ninja! ;)
