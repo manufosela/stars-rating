@@ -95,8 +95,8 @@
         this.manual = this.manual || this.mode === "manual";
       }
 
-      disconeectedCallback() {
-        super.disconeectedCallback();
+      disconnectedCallback() {
+        super.disconnectedCallback();
         this.$.rating.removeEventListener('click', this._rate);
       }
 
