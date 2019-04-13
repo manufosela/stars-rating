@@ -1,0 +1,28 @@
+{
+  "name": "@manufosela/stars-rating",
+  "description": "Polymer 3.0 webcomponent with lit-html to draw a percent of circle",
+  "version": "3.0.0",
+  "main": "stars-rating.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manufosela/stars-rating"
+  },
+  "author": "manufosela",
+  "license": "MIT",
+  "keywords": [
+    "webcomponent",
+    "lit-element"
+  ],
+  "bugs": {
+    "url": "https://github.com/manufosela/stars-rating/issues"
+  },
+  "homepage": "https://github.com/manufosela/stars-rating",
+  "dependencies": {
+    "@polymer/lit-element": "^0.6.1",
+    "@polymer/polymer": "^3.0.0"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.2",
+    "@webcomponents/webcomponentsjs": "^2.0.0"
+  }
+}
