@@ -4,34 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>cvitaede-starsrating demo</title>
+    <title>stars-rating demo</title>
 
-    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <link rel="import" href="/bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="/bower_components/iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../cvitaede-starsrating.html">
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
 
-    <link rel="import" href="/bower_components/polymer/lib/elements/dom-bind.html">
+    <script type="module" src="../stars-rating.js"></script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-
       </style>
     </custom-style>
   </head>
   <body>
-
     <div class="vertical-section-container centered">
-      <h3>Basic cvitaede-starsrating Demo</h3>
+      <h3>Basic stars-rating Demo</h3>
       <demo-snippet>
         <template>
-          <cvitaede-starsrating num-stars="8" rating="6"></cvitaede-starsrating>
+          <stars-rating num-stars="8" rating="6"></stars-rating>
         </template>
       </demo-snippet>
       <demo-snippet>
         <template>
-          <cvitaede-starsrating num-stars="12" rating="8" star-size="0.5em"></cvitaede-starsrating>
+          <stars-rating num-stars="12" rating="8" star-size="0.5em"></stars-rating>
         </template>
       </demo-snippet>
       <h3>Customized</h3>
@@ -43,7 +42,7 @@
 							--star-size: 0.5em;
 						}
 					</style>
-          <cvitaede-starsrating id="emoji" num-stars="8" rating="6"></cvitaede-starsrating>
+          <stars-rating id="emoji" num-stars="8" rating="6"></stars-rating>
         </template>
       </demo-snippet>
       <h3>Click in star to vote a rating</h3>
@@ -52,7 +51,7 @@
           <dom-bind>
             <template>
               <p>Your rating: {{rating}}</p>
-              <cvitaede-starsrating num-stars="5" manual rating="{{rating}}"></cvitaede-starsrating>
+              <stars-rating num-stars="5" manual rating="{{rating}}"></stars-rating>
             </template>
           </dom-bind>
         </template>
@@ -60,7 +59,7 @@
 
       <demo-snippet>
         <template>
-          <cvitaede-starsrating num-stars="5" rating="3" manual></cvitaede-starsrating>
+          <stars-rating num-stars="5" rating="3" manual></stars-rating>
         </template>
       </demo-snippet>
     </div>
