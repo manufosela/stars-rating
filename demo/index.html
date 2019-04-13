@@ -25,12 +25,12 @@
       <h3>Basic stars-rating Demo</h3>
       <demo-snippet>
         <template>
-          <stars-rating num-stars="8" rating="6"></stars-rating>
+          <stars-rating numstars="8" rating="6"></stars-rating>
         </template>
       </demo-snippet>
       <demo-snippet>
         <template>
-          <stars-rating num-stars="12" rating="8" star-size="0.5em"></stars-rating>
+          <stars-rating numstars="12" rating="8" star-size="0.5em"></stars-rating>
         </template>
       </demo-snippet>
       <h3>Customized</h3>
@@ -42,7 +42,7 @@
 							--star-size: 0.5em;
 						}
 					</style>
-          <stars-rating id="emoji" num-stars="8" rating="6"></stars-rating>
+          <stars-rating id="emoji" numstars="8" rating="6"></stars-rating>
         </template>
       </demo-snippet>
       <h3>Click in star to vote a rating</h3>
@@ -51,7 +51,7 @@
           <dom-bind>
             <template>
               <p>Your rating: {{rating}}</p>
-              <stars-rating num-stars="5" manual rating="{{rating}}"></stars-rating>
+              <stars-rating numstars="5" manual rating="{{rating}}"></stars-rating>
             </template>
           </dom-bind>
         </template>
@@ -59,7 +59,7 @@
 
       <demo-snippet>
         <template>
-          <stars-rating num-stars="5" rating="3" manual></stars-rating>
+          <stars-rating numstars="5" rating="3" manual></stars-rating>
         </template>
       </demo-snippet>
     </div>
