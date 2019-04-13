@@ -14,9 +14,9 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
     return {
       _stars: {
         type: Array,
-        computed: '_updateNumStars(numStars)'
+        computed: ''
       },
-      numStars: {
+      numstars: {
         type: Number,
         value: 7
       },
@@ -47,6 +47,7 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
     super.connectedCallback();
     // Backward compatibility
     this.manual = this.manual || this.mode === "manual";
+    this._updateNumstars();
   }
 
   disconnectedCallback() {
@@ -54,8 +55,8 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
     this.$.rating.removeEventListener('click', this._rate);
   }
 
-  updated(changedProperties) {
-    
+  updated() {
+       
   }
 
   _isHightlight(index) {
@@ -65,13 +66,13 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
   _ratingChange(rating) {
     if (this.rating < rating) {
       this.rating = 0;
-    } else if (rating > this.numStars) {
-      this.rating = this.numStars;
+    } else if (rating > this.numstars) {
+      this.rating = this.numstars;
     }
   }
 
-  _updateNumStars(numStars) {
-    return new Array(numStars);
+  _updateNumstars() {
+    this._stars = new Array(this.numstars);
   }
 
   reset() {
@@ -92,9 +93,20 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
     }
   }
 
+  _htmlStars(){
+    let html = '';
+    for (let index=0; index<this.numstars; index++) {
+      html += html`label for="star${index}" hightlight="{$this._isHightlight(index)}">
+            <input type="radio" id="star${index}" name="rating" value="${index}"/>
+          </label>`
+    }  
+    return html;
+  }
+
   render() {
+    let index = 1;
     return html`
-    <style>
+      <style>
         :host(:not([hidden])) {
           display: block;
           font-size: 2em;
@@ -131,11 +143,10 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
         }
     </style>
     <fieldset id="rating">
-      ${this._stars.map((item,index) => html`
         <label for="star${index}" hightlight="{$this._isHightlight(index)}">
           <input type="radio" id="star${index}" name="rating" value="${index}"/>
         </label>
-      `)}
+        </label>
     </fieldset>
     `;
   }
