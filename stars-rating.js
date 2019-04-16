@@ -1,9 +1,9 @@
-import { LitElement, html } from '/node_modules/@polymer/lit-element/lit-element.js';
-import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/lib/utils/render-status.js';
+import { LitElement, html, css } from './node_modules/lit-element/lit-element.js';
+import { repeat } from './node_modules/lit-html/directives/repeat.js';
 
 /**
  * `stars-rating`
- * Circle Alone
+ * Stars Rating
  *
  * @customElement
  * @polymer
@@ -13,8 +13,7 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
   static get properties() {
     return {
       _stars: {
-        type: Array,
-        computed: ''
+        type: Array
       },
       numstars: {
         type: Number,
@@ -22,20 +21,51 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
       },
       rating: {
         type: Number,
-        notify: true,
-        value: 0,
-        observer: '_ratingChange'
+        value: 0
       },
       manual: {
         type: Boolean,
-        value: false,
-        observer: '_manualChanged'
+        value: false
       },
       mode: {
         type: String,
         value: "auto"
       }
     }
+  }
+
+  static get styles() {
+    return css`
+      :host(:not([hidden])) {
+          display: block;
+          font-size: 2em;
+          --star-size: 1em;
+          --star-color: #FFD700;
+        }
+        fieldset,
+        label {
+          margin: 0;
+          padding: 0;
+        }
+        fieldset {
+          border: none;
+        }
+        input {
+          display: none;
+        }
+        label:before {
+          font-size: var(--star-size, 1em);
+          display: inline-block;
+          content: var(--start-unicode, "✩");
+        }
+        label {
+          color: var(--star-color);
+          opacity: 0.3;
+        }
+        label[data-hightlight] {
+          opacity: 1;
+        }
+    `;
   }
 
   constructor() {
@@ -45,29 +75,20 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
 
   connectedCallback() {
     super.connectedCallback();
-    // Backward compatibility
-    this.manual = this.manual || this.mode === "manual";
     this._updateNumstars();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.$.rating.removeEventListener('click', this._rate);
+    this.renderRoot.querySelector("#rating").removeEventListener('click', this._rate);
   }
 
-  updated() {
-       
-  }
-
-  _isHightlight(index) {
-    return index < this.rating;
-  }
-
-  _ratingChange(rating) {
-    if (this.rating < rating) {
-      this.rating = 0;
-    } else if (rating > this.numstars) {
-      this.rating = this.numstars;
+  updated(changedProperties, o) {
+    if (changedProperties.get('manual') !==this.manual) {
+      this._manualChanged();
+    }
+    if (changedProperties.get('rating') !==  this.rating) {
+      this._ratingChange();
     }
   }
 
@@ -75,15 +96,28 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
     this._stars = new Array(this.numstars);
   }
 
+  _isHightlight(index) {
+    return index < this.rating;
+  }
+
+  _ratingChange() {
+    if (this.rating < 0) {
+      this.rating = 0;
+    } else if (this.rating > this.numstars) {
+      this.rating = this.numstars;
+    }
+    this.dispatchEvent(new CustomEvent('rating-changed', { detail: this.rating }));
+  }
+
   reset() {
     this.rating = 0;
   }
 
-  _manualChanged(manual) {
+  _manualChanged() {
     if (this.manual) {
-      this.$.rating.addEventListener('click', this._rate);
+      this.renderRoot.querySelector("#rating").addEventListener('click', this._rate);
     } else {
-      this.$.rating.removeEventListener('click', this._rate);
+      this.renderRoot.querySelector("#rating").removeEventListener('click', this._rate);
     }
   }
 
@@ -93,61 +127,18 @@ import {afterNextRender, beforeNextRender} from '/node_modules/@polymer/polymer/
     }
   }
 
-  _htmlStars(){
-    let html = '';
-    for (let index=0; index<this.numstars; index++) {
-      html += html`label for="star${index}" hightlight="{$this._isHightlight(index)}">
-            <input type="radio" id="star${index}" name="rating" value="${index}"/>
-          </label>`
-    }  
-    return html;
-  }
-
   render() {
     let index = 1;
     return html`
-      <style>
-        :host(:not([hidden])) {
-          display: block;
-          font-size: 2em;
-          --star-size: 1em;
-          --star-color: #FFD700;
-        }
-
-        fieldset,
-        label {
-          margin: 0;
-          padding: 0;
-        }
-
-        fieldset {
-          border: none;
-        }
-        input {
-          display: none;
-        }
-
-        label:before {
-          font-size: var(--star-size, 1em);
-          display: inline-block;
-          content: var(--start-unicode, "\2605");
-        }
-
-        label {
-          color: var(--star-color);
-          opacity: 0.3;
-        }
-
-        label[hightlight] {
-          opacity: 1;
-        }
-    </style>
-    <fieldset id="rating">
-        <label for="star${index}" hightlight="{$this._isHightlight(index)}">
-          <input type="radio" id="star${index}" name="rating" value="${index}"/>
-        </label>
-        </label>
-    </fieldset>
+      <fieldset id="rating">
+        ${repeat(
+          this._stars,
+          item => item,
+          (item, i) => html`<label for="star${i}" ?data-hightlight="${this._isHightlight(i)}">
+            <input type="radio" id="star${i}" name="rating" value="${i}" />
+          </label>`
+        )}
+      </fieldset>
     `;
   }
 }

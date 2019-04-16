@@ -10,13 +10,34 @@ Polymer web component configurable to vote a rate stars.
 
 <!---
 ```
-<custom-element-demo>
-  <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="stars-rating.html">
-    <next-code-block></next-code-block>
-  </template>
-</custom-element-demo>
+<h2>Basic stars-rating Demo</h2>
+<h3>Demo 1</h3>
+<stars-rating numstars="8" rating="6"></stars-rating>
+
+<h3>Demo 2 - stars size 0.5em</h3>
+<stars-rating numstars="12" rating="8" star-size="0.5em"></stars-rating>
+
+<h3>Demo 3 - Customized</h3>
+<style>
+  #emoji {
+    --start-unicode: '❤️';
+    --star-size: 0.5em;
+  }
+</style>
+<stars-rating id="emoji" numstars="8" rating="6"></stars-rating>
+
+<h3>Demo 6 - Click in star to vote a rating</h3>
+<p>Your rating: <span id="yourRating"></span></p>
+<stars-rating id="demo6" numstars="5" manual></stars-rating>
+<script>
+  var el = document.querySelector("#demo6");
+  el.addEventListener('rating-changed', function(ev) {
+    document.querySelector("#yourRating").innerText = ev.detail;
+  })
+</script>
+
+<h3>Demo 5 - Click in star to vote a rating with by default value</h3>
+<stars-rating numstars="5" rating="3" manual></stars-rating>
 ```
 -->
 ```html
