@@ -8,7 +8,6 @@ Polymer web component configurable to vote a rate stars.
 [stars-rating codepen demo](http://codepen.io/manufosela/pen/QGaKMw)
 [stars-rating jsfiddle demo](https://jsfiddle.net/manufosela/2qnz1Lx2/)
 
-<!---
 ```
 <h2>Basic stars-rating Demo</h2>
 <h3>Demo 1</h3>
@@ -38,6 +37,15 @@ Polymer web component configurable to vote a rate stars.
 
 <h3>Demo 5 - Click in star to vote a rating with by default value</h3>
 <stars-rating numstars="5" rating="3" manual></stars-rating>
+```
+<!---
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="stars-rating.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
 ```
 -->
 ```html
