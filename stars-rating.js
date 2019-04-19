@@ -1,5 +1,5 @@
-import { LitElement, html, css } from './node_modules/lit-element/lit-element.js';
-import { repeat } from './node_modules/lit-html/directives/repeat.js';
+import { LitElement, html, css } from 'lit-element';
+import { repeat } from 'lit-html/directives/repeat';
 
 /**
  * `stars-rating`
