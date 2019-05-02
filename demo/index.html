@@ -5,15 +5,26 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
     <title>stars-rating demo</title>
     <script type="module" src="../stars-rating.js"></script>
+    <style>
+      pre { background:#000; color:#FFF; font-weight:bold; }
+    </style>
   </head>
   <body>
     <div class="vertical-section-container centered">
       <h2>Basic stars-rating Demo</h2>
       <h3>Demo 1</h3>
+      <pre><code>
+      &lt;stars-rating numstars="8" rating="6"&gt;&lt;/stars-rating&gt;
+      </code></pre>
       <stars-rating numstars="8" rating="6"></stars-rating>
+      <hr/>
 
       <h3>Demo 2 - stars size 0.5em</h3>
+      <pre><code>
+        &lt;stars-rating numstars="12" rating="8" star-size="0.5em"&gt;&lt;/stars-rating&gt;  
+      </code></pre>
       <stars-rating numstars="12" rating="8" star-size="0.5em"></stars-rating>
+      <hr/>
 
       <h3>Demo 3 - Customized</h3>
       <style>
@@ -22,9 +33,16 @@
           --star-size: 0.5em;
         }
       </style>
+      <pre><code>
+        &lt;stars-rating id="emoji" numstars="8" rating="6"&lt;&gt;/stars-rating&gt;
+      </code></pre>
       <stars-rating id="emoji" numstars="8" rating="6"></stars-rating>
+      <hr/>
 
-      <h3>Demo 6 - Click in star to vote a rating</h3>
+      <h3>Demo 4 - Click in star to vote a rating</h3>
+      <pre><code>
+        &lt;stars-rating id="demo6" numstars="5" manual resetbtn&gt;&lt;/stars-rating&gt;
+      </code></pre>
       <p>Your rating: <span id="yourRating"></span></p>
       <stars-rating id="demo6" numstars="5" manual resetbtn></stars-rating>
       <script>
@@ -33,10 +51,15 @@
           document.querySelector("#yourRating").innerText = ev.detail;
         })
       </script>
+      <hr/>
     
       <h3>Demo 5 - Click in star to vote a rating with by default value</h3>
+      <pre><code>
+          &lt;stars-rating numstars="5" rating="3" manual&lt;&gt;/stars-rating&gt; 
+      </code></pre>
       <stars-rating numstars="5" rating="3" manual></stars-rating>
-        
+      <hr/>
+      
     </div>
   </body>
 </html>
