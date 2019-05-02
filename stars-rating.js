@@ -30,6 +30,10 @@ import { repeat } from 'lit-html/directives/repeat';
       mode: {
         type: String,
         value: "auto"
+      },
+      resetbtn: {
+        type: Boolean,
+        value: false
       }
     }
   }
@@ -64,6 +68,17 @@ import { repeat } from 'lit-html/directives/repeat';
         }
         label[data-hightlight] {
           opacity: 1;
+        }
+        label.resetbtn {
+          color: #F00;
+          font-size:0.5em;
+          opacity: 1;
+        }
+        label.resetbtn:before {
+          font-size: var(--star-size, 1em);
+          display: inline-block;
+          content: var(--start-unicode, "ø");
+          opacity:1;
         }
     `;
   }
@@ -131,6 +146,7 @@ import { repeat } from 'lit-html/directives/repeat';
     let index = 1;
     return html`
       <fieldset id="rating">
+        ${(this.resetbtn && this.manual)?html`<label class="resetbtn"><input @click="${this.reset}" type="radio" id="x" name="resetbtn" value="-1" /></label>  `:html``}
         ${repeat(
           this._stars,
           item => item,
