@@ -9,7 +9,7 @@ import { repeat } from 'lit-html/directives/repeat';
  * @polymer
  * @demo demo/index.html
  */
- class StarsRating extends LitElement {
+class StarsRating extends LitElement {
   static get properties() {
     return {
       _stars: {
@@ -29,7 +29,7 @@ import { repeat } from 'lit-html/directives/repeat';
       },
       mode: {
         type: String,
-        value: "auto"
+        value: 'auto'
       },
       resetbtn: {
         type: Boolean,
@@ -60,7 +60,7 @@ import { repeat } from 'lit-html/directives/repeat';
         label:before {
           font-size: var(--star-size, 1em);
           display: inline-block;
-          content: var(--start-unicode, "✩");
+          content: var(--start-unicode, "★");
         }
         label {
           color: var(--star-color);
@@ -95,11 +95,11 @@ import { repeat } from 'lit-html/directives/repeat';
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.renderRoot.querySelector("#rating").removeEventListener('click', this._rate);
+    this.renderRoot.querySelector('#rating').removeEventListener('click', this._rate);
   }
 
   updated(changedProperties, o) {
-    if (changedProperties.get('manual') !==this.manual) {
+    if (changedProperties.get('manual') !== this.manual) {
       this._manualChanged();
     }
     if (changedProperties.get('rating') !==  this.rating) {
@@ -130,9 +130,9 @@ import { repeat } from 'lit-html/directives/repeat';
 
   _manualChanged() {
     if (this.manual) {
-      this.renderRoot.querySelector("#rating").addEventListener('click', this._rate);
+      this.renderRoot.querySelector('#rating').addEventListener('click', this._rate);
     } else {
-      this.renderRoot.querySelector("#rating").removeEventListener('click', this._rate);
+      this.renderRoot.querySelector('#rating').removeEventListener('click', this._rate);
     }
   }
 
@@ -146,13 +146,13 @@ import { repeat } from 'lit-html/directives/repeat';
     let index = 1;
     return html`
       <fieldset id="rating">
-        ${(this.resetbtn && this.manual)?html`<label class="resetbtn"><input @click="${this.reset}" type="radio" id="x" name="resetbtn" value="-1" /></label>  `:html``}
+        ${(this.resetbtn && this.manual) ? html`<label class="resetbtn"><input @click="${this.reset}" type="radio" id="x" name="resetbtn" value="-1" /></label>  ` : html``}
         ${repeat(
           this._stars,
           item => item,
           (item, i) => html`<label for="star${i}" ?data-hightlight="${this._isHightlight(i)}">
-            <input type="radio" id="star${i}" name="rating" value="${i}" />
-          </label>`
+                              <input type="radio" id="star${i}" name="rating" value="${i}" />
+                            </label>`
         )}
       </fieldset>
     `;
