@@ -26,25 +26,38 @@
       <stars-rating numstars="12" rating="8" star-size="0.5em"></stars-rating>
       <hr/>
 
-      <h3>Demo 3 - Customized</h3>
+      <h3>Demo 3 - Customized emoji</h3>
+      <pre><code>
+        &lt;style&gt;
+          #emoji {
+            --start-unicode: '❤️';
+            --star-size: 0.5em;
+          }
+        &lt;/style&gt;
+        &lt;stars-rating id="emoji" numstars="8" rating="6"&lt;&gt;/stars-rating&gt;
+      </code></pre>
       <style>
         #emoji {
           --start-unicode: '❤️';
           --star-size: 0.5em;
         }
       </style>
-      <pre><code>
-        &lt;stars-rating id="emoji" numstars="8" rating="6"&lt;&gt;/stars-rating&gt;
-      </code></pre>
       <stars-rating id="emoji" numstars="8" rating="6"></stars-rating>
       <hr/>
 
-      <h3>Demo 4 - Click in star to vote a rating</h3>
+      <h3>Demo 4 - Click in star to vote a rating with binding and reset option (ø)</h3>
       <pre><code>
+        &lt;p&gt;Your rating: &lt;span id="yourRating"&gt;&lt;/span>&lt;/p&gt;
         &lt;stars-rating id="demo6" numstars="5" manual resetbtn&gt;&lt;/stars-rating&gt;
+        &lt;script&gt;
+          var el = document.querySelector("#demo6");
+          el.addEventListener('rating-changed', function(ev) {
+            document.querySelector("#yourRating").innerText = ev.detail;
+          })
+          &lt;/script&gt;
       </code></pre>
       <p>Your rating: <span id="yourRating"></span></p>
-      <stars-rating id="demo6" numstars="5" manual resetbtn></stars-rating>
+      <stars-rating id="demo4" numstars="5" manual resetbtn></stars-rating>
       <script>
         var el = document.querySelector("#demo6");
         el.addEventListener('rating-changed', function(ev) {
@@ -53,11 +66,22 @@
       </script>
       <hr/>
     
-      <h3>Demo 5 - Click in star to vote a rating with by default value</h3>
+      <h3>Demo 5 - Click in a flame to vote a rating with by default value</h3>
       <pre><code>
-          &lt;stars-rating numstars="5" rating="3" manual&lt;&gt;/stars-rating&gt; 
+          &lt;style&gt;
+            #emoji2  {
+              --start-unicode: '🔥';
+            }
+          &lt;/style&gt;
+          &lt;stars-rating id="emoji2" numstars="5" rating="3" manual&lt;&gt;/stars-rating&gt; 
       </code></pre>
-      <stars-rating numstars="5" rating="3" manual></stars-rating>
+      <style>
+        #emoji2  {
+          --start-unicode: '🔥';
+          --star-size: 0.5em;
+        }
+      </style>
+      <stars-rating id="emoji2" numstars="5" rating="3" manual></stars-rating>
       <hr/>
       
     </div>
