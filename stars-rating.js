@@ -9,7 +9,7 @@ import { repeat } from 'lit-html/directives/repeat';
  * @polymer
  * @demo demo/index.html
  */
-export class StarsRating extends LitElement {
+class StarsRating extends LitElement {
   static get properties() {
     return {
       _stars: {
