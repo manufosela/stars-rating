@@ -59,7 +59,7 @@
       <p>Your rating: <span id="yourRating"></span></p>
       <stars-rating id="demo4" numstars="5" manual resetbtn></stars-rating>
       <script>
-        var el = document.querySelector("#demo6");
+        var el = document.querySelector("#demo4");
         el.addEventListener('rating-changed', function(ev) {
           document.querySelector("#yourRating").innerText = ev.detail;
         })
