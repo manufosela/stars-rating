@@ -1,37 +1,58 @@
 {
   "name": "@manufosela/stars-rating",
   "description": "Lit-Element webcomponent to draw stars rating with vote options",
-  "version": "3.3.6",
-  "main": "stars-rating.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/manufosela/stars-rating"
-  },
-  "author": "manufosela",
   "license": "MIT",
-  "keywords": [
-    "webcomponent",
-    "lit-element"
-  ],
-  "bugs": {
-    "url": "https://github.com/manufosela/stars-rating/issues"
+  "author": "manufosela",
+  "version": "3.4.0",
+  "main": "stars-rating.js",
+  "module": "firebase-loginbutton.js",
+  "type": "module",
+  "scripts": {
+    "analyze": "cem analyze --litelement",
+    "start": "web-dev-server",
+    "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner --watch",
+    "storybook": "npm run analyze -- --exclude dist && web-dev-server -c .storybook/server.mjs",
+    "storybook:build": "npm run analyze -- --exclude dist && build-storybook"
   },
-  "homepage": "https://github.com/manufosela/stars-rating",
   "dependencies": {
-    "lit-element": "^2.1.0"
+    "lit": "^2.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/plugin-proposal-decorators": "^7.2.3",
-    "rollup": "^1.1.0",
-    "rollup-plugin-babel": "^4.3.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
-    "@webcomponents/webcomponentsjs": "^2.2.4",
-    "es-dev-server": "^1.46.0"
+    "@custom-elements-manifest/analyzer": "^0.4.17",
+    "@open-wc/eslint-config": "^4.3.0",
+    "@open-wc/testing": "next",
+    "@web/dev-server": "^0.1.28",
+    "@web/dev-server-storybook": "next",
+    "@web/test-runner": "^0.13.22",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.4.1"
   },
-  "scripts": {
-    "build": "rm -rf build && mkdir build && rollup -c",
-    "start": "es-dev-server --app-index demo/index.html --node-resolve --watch --open"
+  "customElements": "custom-elements.json",
+  "eslintConfig": {
+    "extends": [
+      "@open-wc",
+      "prettier"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

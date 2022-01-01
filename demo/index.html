@@ -1,12 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"
+    />
     <title>stars-rating demo</title>
     <script type="module" src="../stars-rating.js"></script>
     <style>
-      pre { background:#000; color:#FFF; font-weight:bold; }
+      pre {
+        background: #000;
+        color: #fff;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -17,14 +24,14 @@
       &lt;stars-rating numstars="8" rating="6"&gt;&lt;/stars-rating&gt;
       </code></pre>
       <stars-rating numstars="8" rating="6"></stars-rating>
-      <hr/>
+      <hr />
 
       <h3>Demo 2 - stars size 0.5em</h3>
       <pre><code>
         &lt;stars-rating numstars="12" rating="8" star-size="0.5em"&gt;&lt;/stars-rating&gt;  
       </code></pre>
       <stars-rating numstars="12" rating="8" star-size="0.5em"></stars-rating>
-      <hr/>
+      <hr />
 
       <h3>Demo 3 - Customized emoji</h3>
       <pre><code>
@@ -43,9 +50,12 @@
         }
       </style>
       <stars-rating id="emoji" numstars="8" rating="6"></stars-rating>
-      <hr/>
+      <hr />
 
-      <h3>Demo 4 - Click in star to vote a rating with binding and reset option (ø)</h3>
+      <h3>
+        Demo 4 - Click in star to vote a rating with binding and reset option
+        (ø)
+      </h3>
       <pre><code>
         &lt;p&gt;Your rating: &lt;span id="yourRating"&gt;&lt;/span>&lt;/p&gt;
         &lt;stars-rating id="demo6" numstars="5" manual resetbtn&gt;&lt;/stars-rating&gt;
@@ -59,13 +69,14 @@
       <p>Your rating: <span id="yourRating"></span></p>
       <stars-rating id="demo4" numstars="5" manual resetbtn></stars-rating>
       <script>
-        var el = document.querySelector("#demo4");
-        el.addEventListener('rating-changed', function(ev) {
-          document.querySelector("#yourRating").innerText = ev.detail;
-        })
+        const el = document.querySelector('#demo4');
+        function ratingChanged(ev) {
+          document.querySelector('#yourRating').innerText = ev.detail;
+        }
+        el.addEventListener('rating-changed', ratingChanged);
       </script>
-      <hr/>
-    
+      <hr />
+
       <h3>Demo 5 - Click in a flame to vote a rating with by default value</h3>
       <pre><code>
           &lt;style&gt;
@@ -76,14 +87,13 @@
           &lt;stars-rating id="emoji2" numstars="5" rating="3" manual&lt;&gt;/stars-rating&gt; 
       </code></pre>
       <style>
-        #emoji2  {
+        #emoji2 {
           --start-unicode: '🔥';
           --star-size: 0.5em;
         }
       </style>
       <stars-rating id="emoji2" numstars="5" rating="3" manual></stars-rating>
-      <hr/>
-      
+      <hr />
     </div>
   </body>
 </html>

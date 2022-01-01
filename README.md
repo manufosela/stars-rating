@@ -1,97 +1,76 @@
-# stars-rating [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/manufosela/stars-rating)
+# \<stars-rating>
 
+This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
-Lit-Elementy web component configurable to vote a rate stars.
+## Installation
 
-## Demo
-
-[stars-rating codepen demo](https://codepen.io/manufosela/pen/ROJKvj)
-
+```bash
+npm i stars-rating
 ```
-<h2>Basic stars-rating Demo</h2>
-<h3>Demo 1</h3>
-<stars-rating numstars="8" rating="6"></stars-rating>
 
-<h3>Demo 2 - stars size 0.5em</h3>
-<stars-rating numstars="12" rating="8" star-size="0.5em"></stars-rating>
+## Usage
 
-<h3>Demo 3 - Customized</h3>
-<style>
-  #emoji {
-    --start-unicode: '❤️';
-    --star-size: 0.5em;
-  }
-</style>
-<stars-rating id="emoji" numstars="8" rating="6"></stars-rating>
-
-<h3>Demo 4 - Click in star to vote a rating</h3>
-<p>Your rating: <span id="yourRating"></span></p>
-<stars-rating id="demo6" numstars="5" manual></stars-rating>
-<script>
-  var el = document.querySelector("#demo6");
-  el.addEventListener('rating-changed', function(ev) {
-    document.querySelector("#yourRating").innerText = ev.detail;
-  })
+```html
+<script type="module">
+  import 'stars-rating/stars-rating.js';
 </script>
 
-<h3>Demo 5 - Click in star to vote a rating with by default value</h3>
-<stars-rating numstars="5" rating="3" manual></stars-rating>
-```
-<!---
-```
-<custom-element-demo>
-  <template>
-    <link rel="import" href="stars-rating.html">
-    <next-code-block></next-code-block>
-  </template>
-</custom-element-demo>
-```
--->
-```html
-<stars-rating num-stars="8" rating="6"></stars-rating>
-
-<stars-rating num-stars="12" rating="8" star-size="0.5em"></stars-rating>
-
-<p>Click in star to vote a rating</p>
-<stars-rating num-stars="5" mode="manual"></stars-rating>
-
-<p>Click in star to change the rating</p>
-<stars-rating num-stars="5" rating="3" mode="manual"></stars-rating>
-```
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) and npm (packaged with [Node.js](https://nodejs.org)) installed. Run `npm install` to install your element's dependencies, then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
-```
-$ polymer serve
+<stars-rating></stars-rating>
 ```
 
-## Running Tests
+## Linting and formatting
 
-```
-$ polymer test
-```
+To scan the project for linting and formatting errors, run
 
-## Build
-```
-$ npm run build
+```bash
+npm run lint
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+To automatically fix linting and formatting errors, run
 
-## Author
+```bash
+npm run format
+```
 
-* **Mánu Fosela** - *Javascript Composer* - [manufosela](https://github.com/manufosela)
+## Testing with Web Test Runner
 
-## License
+To execute a single test run:
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details
+```bash
+npm run test
+```
 
-## Acknowledgments
+To run the tests in interactive watch mode run:
 
-* Cesar Villar @beatbits 
-Thank you for his comments and that he is always there to help
-* Jorge del Casar @jorgecasar
-Thank you for emojis and improvements. You are a true ninja! ;)
+```bash
+npm run test:watch
+```
+
+## Demoing with Storybook
+
+To run a local instance of Storybook for your component, run
+
+```bash
+npm run storybook
+```
+
+To build a production version of Storybook, run
+
+```bash
+npm run storybook:build
+```
+
+
+## Tooling configs
+
+For most of the tools, the configuration is in the `package.json` to minimize the amount of files in your project.
+
+If you customize the configuration a lot, you can consider moving them to individual files.
+
+## Local Demo with `web-dev-server`
+
+```bash
+npm start
+```
+
+To run a local development server that serves the basic demo located in `demo/index.html`
