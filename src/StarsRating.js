@@ -13,28 +13,28 @@ export class StarsRating extends LitElement {
   static get properties() {
     return {
       _stars: {
-        type: Array
+        type: Array,
       },
       numstars: {
         type: Number,
-        value: 7
+        value: 7,
       },
       rating: {
         type: Number,
-        value: 0
+        value: 0,
       },
       manual: {
         type: Boolean,
-        value: false
+        value: false,
       },
       mode: {
         type: String,
-        value: 'auto'
+        value: 'auto',
       },
       resetbtn: {
         type: Boolean,
-        value: false
-      }
+        value: false,
+      },
     }
   }
 
@@ -45,6 +45,8 @@ export class StarsRating extends LitElement {
           font-size: 2em;
           --star-size: 1em;
           --star-color: #FFD700;
+          --star-unicode: '★';
+          --star-reset-unicode: 'ø';
         }
         fieldset,
         label {
@@ -60,7 +62,7 @@ export class StarsRating extends LitElement {
         label:before {
           font-size: var(--star-size, 1em);
           display: inline-block;
-          content: var(--start-unicode, "★");
+          content: var(--star-unicode, "★");
         }
         label {
           color: var(--star-color);
@@ -77,7 +79,7 @@ export class StarsRating extends LitElement {
         label.resetbtn:before {
           font-size: var(--star-size, 1em);
           display: inline-block;
-          content: var(--start-unicode, "ø");
+          content: var(--star-reset-unicode, "ø");
           opacity:1;
         }
     `;
@@ -89,12 +91,12 @@ export class StarsRating extends LitElement {
   }
 
   connectedCallback() {
-    super.connectedCallback();
+    if (super.connectedCallback) super.connectedCallback();
     this._updateNumstars();
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback();
+    if (super.disconnectedCallback) super.disconnectedCallback();
     this.renderRoot.querySelector('#rating').removeEventListener('click', this._rate);
   }
 

@@ -15,8 +15,15 @@ npm i stars-rating
   import 'stars-rating/stars-rating.js';
 </script>
 
-<stars-rating></stars-rating>
+<stars-rating numstars="8" rating="6"></stars-rating>
 ```
+
+## Styling
+
+- **--star-size**. Default 1em
+- **--star-color**. Default #FFD700
+- **--star-unicode**. Default'★'
+- **--star-reset-unicode**. Default'ø'
 
 ## Linting and formatting
 
@@ -59,7 +66,6 @@ To build a production version of Storybook, run
 ```bash
 npm run storybook:build
 ```
-
 
 ## Tooling configs
 
