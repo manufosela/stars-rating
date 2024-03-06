@@ -3,7 +3,7 @@
   "description": "Lit-Element webcomponent to draw stars rating with vote options",
   "license": "MIT",
   "author": "manufosela",
-  "version": "3.4.2",
+  "version": "3.4.3",
   "main": "stars-rating.js",
   "module": "stars-rating.js",
   "type": "module",
@@ -18,7 +18,7 @@
     "storybook:build": "npm run analyze -- --exclude dist && build-storybook"
   },
   "dependencies": {
-    "lit": "^2.0.2"
+    "lit": "^3.1.2"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.4.17",
